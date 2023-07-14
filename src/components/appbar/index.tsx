@@ -4,8 +4,9 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import AdbIcon from '@mui/icons-material/Adb';
 import SearchIcon from '@mui/icons-material/Search';
+
+import { Pokeball } from '../../assets/icons';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -54,7 +55,7 @@ export default function SearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <img src="/src/assets/icons/Pokeball.svg" alt="Pokeball" />
+          <img src={Pokeball} alt="Pokeball" />
           <Typography
             variant="h6"
             noWrap

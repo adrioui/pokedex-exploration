@@ -8,9 +8,11 @@ import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 import Divider from '@mui/material/Divider';
 import CardContent from '@mui/material/CardContent';
+import { LinearProgressProps } from '@mui/material/LinearProgress';
 
 import { PokemonProps } from '../../interfaces/pokemon';
 import LinearWithValueLabel from '../pokemon/PokemonBaseStat';
+import { Silhouette } from '../../assets/illustrations';
 
 type InfoItem = {
   name: string;
@@ -107,8 +109,6 @@ const PokemonDetails: React.FC<PokemonProps> = ({
     (move) => move.charAt(0).toUpperCase() + move.slice(1)
   );
 
-  const pathName = `/src/assets/illustrations/${formattedName}.svg`;
-
   return (
     <Box
       sx={{
@@ -159,11 +159,7 @@ const PokemonDetails: React.FC<PokemonProps> = ({
           <Grid item xs={12} md={4}>
             <CardMedia
               component="img"
-              src={
-                checkImage(pathName)
-                  ? pathName
-                  : '/src/assets/illustrations/Silhouette.svg'
-              }
+              src={Silhouette}
               alt="silhouette"
               sx={{
                 display: 'flex',
@@ -246,12 +242,12 @@ const PokemonDetails: React.FC<PokemonProps> = ({
             </Grid>
             <Grid item xs={12}>
               <LinearWithValueLabel
-                hp={hp}
-                atk={atk}
-                def={def}
-                satk={satk}
-                sdef={sdef}
-                spd={spd}
+                hp={{ value: Number(hp), name: 'HP' }}
+                atk={{ value: Number(atk), name: 'ATK' }}
+                def={{ value: Number(def), name: 'DEF' }}
+                satk={{ value: Number(satk), name: 'SATK' }}
+                sdef={{ value: Number(sdef), name: 'SDEF' }}
+                spd={{ value: Number(spd), name: 'SPD' }}
               />
             </Grid>
           </Grid>

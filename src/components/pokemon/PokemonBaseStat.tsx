@@ -24,7 +24,6 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 const PokemonBaseStat: React.FC<PokemonStatProps> = ({
-  id,
   hp,
   atk,
   def,
@@ -33,6 +32,8 @@ const PokemonBaseStat: React.FC<PokemonStatProps> = ({
   spd,
 }) => {
   const stats = [hp, atk, def, satk, sdef, spd];
+
+  console.log(hp.name);
 
   return (
     <Grid container>
