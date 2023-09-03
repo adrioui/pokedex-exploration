@@ -37,6 +37,12 @@ function App() {
         <ColorModeContextProvider>
           <CssBaseline />
           <GlobalStyles styles={{ html: { WebkitFontSmoothing: 'auto' } }} />
+          <style>
+            {`
+              @import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
+            `}
+          </style>
+
           <RefineSnackbarProvider>
             <Refine
               dataProvider={dataProvider('https://pokeapi.co/api/v2')}

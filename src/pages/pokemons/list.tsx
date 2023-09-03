@@ -20,7 +20,56 @@ const PokemonList = () => {
         )
           .get()
           .json<{ results: PokemonCardProps[] }>();
-        setPokemonData(response.results);
+
+        const updatedPokemonData = await Promise.all(
+          response.results.map(async (pokemon) => {
+            const spriteResponse = await wretch(pokemon.url).get().json<{
+              stats: {
+                base_stat: number;
+              }[];
+              types: {
+                type: {
+                  name: string;
+                };
+              }[];
+              sprites: { front_default: string };
+            }>();
+
+            // Extract the attack and defense stats from the spriteResponse
+            const attackStat = spriteResponse.stats['1'];
+            const defenseStat = spriteResponse.stats['2'];
+
+            // Initialize variables for attack, defense, and types
+            let attack = 0;
+            let defense = 0;
+            const types: string[] = [];
+
+            // Calculate the attack and defense stats if the corresponding stats are found in the data
+            if (attackStat) {
+              attack = attackStat.base_stat || 0;
+            }
+
+            if (defenseStat) {
+              defense = defenseStat.base_stat || 0;
+            }
+
+            // Loop through the types array to extract type names
+            for (const type of spriteResponse.types) {
+              types.push(type.type.name);
+            }
+
+            return {
+              name: pokemon.name,
+              url: pokemon.url,
+              atk: attack,
+              def: defense,
+              types: types,
+              sprite: spriteResponse.sprites.front_default,
+            };
+          })
+        );
+
+        setPokemonData(updatedPokemonData);
       } catch (error) {
         console.log(error);
       }
@@ -47,7 +96,15 @@ const PokemonList = () => {
         <Grid item xs={12} sm={6} md={4} key={index}>
           <Grid container justifyContent="center">
             <Grid item>
-              <PokemonCard key={index} name={pokemon.name} url={pokemon.url} />
+              <PokemonCard
+                key={index}
+                name={pokemon.name}
+                url={pokemon.url}
+                atk={pokemon.atk}
+                def={pokemon.def}
+                types={pokemon.types}
+                sprite={pokemon.sprite}
+              />
             </Grid>
           </Grid>
         </Grid>

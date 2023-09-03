@@ -19,6 +19,7 @@ const PokemonShow = () => {
         const updatedPokemonDetails: PokemonProps = {
           id: response.id,
           name: response.name,
+          sprite: response.sprites['front_default'],
           types: response.types.map(
             (type: { type: { name: string } }) => type.type.name
           ),
@@ -50,6 +51,7 @@ const PokemonShow = () => {
         key={pokemonDetails.id}
         id={pokemonDetails.id}
         name={pokemonDetails.name}
+        sprite={pokemonDetails.sprite}
         types={pokemonDetails.types}
         weight={pokemonDetails.weight}
         height={pokemonDetails.height}

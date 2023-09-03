@@ -8,6 +8,10 @@ export interface PokemonCardProps {
     id?: BaseKey | undefined;
     name: string;
     url: string;
+    atk: number;
+    def: number;
+    types: string[];
+    sprite: string;
 }
 
 export interface PokemonStatProps {
@@ -23,6 +27,7 @@ export interface PokemonStatProps {
 export interface PokemonProps extends PokemonStatProps {
     id?: BaseKey | undefined;
     name: string;
+    sprite: string;
     types: string[];
     weight: number;
     height: number;

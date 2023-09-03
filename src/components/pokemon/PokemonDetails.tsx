@@ -8,22 +8,14 @@ import Typography from '@mui/material/Typography';
 import CardMedia from '@mui/material/CardMedia';
 import Divider from '@mui/material/Divider';
 import CardContent from '@mui/material/CardContent';
-import { LinearProgressProps } from '@mui/material/LinearProgress';
 
 import { PokemonProps } from '../../interfaces/pokemon';
 import LinearWithValueLabel from '../pokemon/PokemonBaseStat';
-import { Silhouette } from '../../assets/illustrations';
 
 type InfoItem = {
   name: string;
   value: string | any;
 };
-
-function checkImage(url: any) {
-  const img = new Image();
-  img.src = url;
-  return img.width !== 0 && img.height !== 0;
-}
 
 const BasicCard: React.FC<{ info: InfoItem[] }> = ({ info }) => {
   return (
@@ -89,6 +81,7 @@ const BasicCard: React.FC<{ info: InfoItem[] }> = ({ info }) => {
 const PokemonDetails: React.FC<PokemonProps> = ({
   id,
   name,
+  sprite,
   types,
   weight,
   height,
@@ -159,7 +152,7 @@ const PokemonDetails: React.FC<PokemonProps> = ({
           <Grid item xs={12} md={4}>
             <CardMedia
               component="img"
-              src={Silhouette}
+              src={sprite}
               alt="silhouette"
               sx={{
                 display: 'flex',
